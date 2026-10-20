@@ -86,34 +86,34 @@ Rather than relying on costly third-party database-as-a-service providers (Supab
 flowchart TD
     subgraph UI ["MovieVault AI Client Layer"]
         Hero["Spotlight Hero & Trailer Player"]
-        Vault["Personal Vault (Queue & Progress)"]
+        Vault["Personal Vault & Watch Queue"]
         Discover["TMDB Discover Grid"]
         Filters["Universal Filter Engine"]
-        Cache["LocalStorage Client State"]
+        Cache["LocalStorage Client Cache"]
     end
 
     subgraph TMDB ["The Movie Database (TMDB) API"]
         Trending["Trending & Popular Feeds"]
         Search["Title & Director Search"]
-        Details["Backdrops, Cast, & Streaming Availability"]
+        Details["Backdrops, Cast & Streaming Info"]
     end
 
     subgraph CloudSync ["GitHub Git-as-a-Database Layer"]
         SyncEngine["GitHub DB Sync Manager"]
-        PrivateRepo["Private Backup Repo\n(Anvithgopa/movievault-db)"]
-        VaultJSON["vault_database.json\n(Version Controlled)"]
+        PrivateRepo["Private Backup Repository (movievault-db)"]
+        VaultJSON["vault_database.json (Version Controlled)"]
     end
 
-    Discover -->|Query Titles| Search
-    Discover -->|Fetch Feeds| Trending
-    Hero -->|Fetch Media Assets| Details
+    Discover -->|"Query Titles"| Search
+    Discover -->|"Fetch Feeds"| Trending
+    Hero -->|"Fetch Media Assets"| Details
 
-    Discover <-->|Check Already Stored GIDs| Cache
-    Vault <-->|Read & Write Library| Cache
+    Discover -->|"Filter Stored Titles"| Cache
+    Vault -->|"Read & Write Library"| Cache
 
-    Cache <-->|Bidirectional Sync| SyncEngine
-    SyncEngine <-->|GitHub REST API (Commits / Trees)| PrivateRepo
-    PrivateRepo --- VaultJSON
+    Cache -->|"Local State"| SyncEngine
+    SyncEngine -->|"GitHub REST API Commits"| PrivateRepo
+    PrivateRepo -->|"Persist JSON"| VaultJSON
 ```
 
 ---
