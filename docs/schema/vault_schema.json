@@ -1,0 +1,72 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "MovieVault Database Schema",
+  "type": "object",
+  "properties": {
+    "updatedAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Timestamp of the last GitHub cloud sync"
+    },
+    "totalMovies": {
+      "type": "integer",
+      "description": "Total count of active catalog entries"
+    },
+    "totalCollections": {
+      "type": "integer",
+      "description": "Total user-curated themed collections"
+    },
+    "movies": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "string", "example": "tmdb-1198994" },
+          "title": { "type": "string", "example": "Send Help" },
+          "originalTitle": { "type": "string" },
+          "mediaType": { "type": "string", "enum": ["Movie", "TV Series"] },
+          "poster": { "type": "string", "format": "uri" },
+          "backdrop": { "type": "string", "format": "uri" },
+          "trailerUrl": { "type": "string", "format": "uri" },
+          "imdbRating": { "type": "number", "minimum": 0, "maximum": 10 },
+          "tmdbRating": { "type": "number", "minimum": 0, "maximum": 10 },
+          "personalRating": { "type": "number", "minimum": 0, "maximum": 10 },
+          "genres": {
+            "type": "array",
+            "items": { "type": "string" },
+            "example": ["Action", "Sci-Fi"]
+          },
+          "runtime": { "type": "integer", "description": "Duration in minutes" },
+          "releaseYear": { "type": "integer", "example": 2026 },
+          "language": { "type": "string", "example": "EN" },
+          "country": { "type": "string", "example": "United States" },
+          "director": { "type": "string" },
+          "cast": { "type": "array", "items": { "type": "string" } },
+          "description": { "type": "string" },
+          "streamingPlatforms": {
+            "type": "array",
+            "items": { "type": "string" },
+            "example": ["Prime Video", "Apple TV", "Netflix"]
+          },
+          "watchStatus": {
+            "type": "string",
+            "enum": ["Currently Watching", "Plan to Watch", "Completed", "Dropped"]
+          },
+          "favorite": { "type": "boolean" },
+          "watchLaterPriority": {
+            "type": "string",
+            "enum": ["High", "Medium", "Low"]
+          },
+          "progress": {
+            "type": "object",
+            "properties": {
+              "minutesLeft": { "type": "integer" },
+              "percentage": { "type": "number" }
+            }
+          }
+        },
+        "required": ["id", "title", "mediaType", "watchStatus"]
+      }
+    }
+  }
+}

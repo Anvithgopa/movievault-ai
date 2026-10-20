@@ -1,0 +1,19 @@
+# User Cinema Database & Personal Vault Backups
+vault_database.json
+*.db
+*.sqlite
+
+# Environment variables & API keys
+.env
+.env.local
+.env.*.local
+*.token
+*.key
+
+# Node.js dependencies
+node_modules/
+npm-debug.log*
+
+# OS metadata
+.DS_Store
+Thumbs.db
