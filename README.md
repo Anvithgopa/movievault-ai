@@ -6,6 +6,10 @@
 
 ### *"Your Intelligent Personal Media Vault, Watch Queue, and Discovery Engine."*
 
+[![Desktop App](https://img.shields.io/badge/Desktop-macOS_%7C_Windows_%7C_Linux-blue?style=for-the-badge&logo=electron&logoColor=white)](#-cross-platform-ecosystem)
+[![Mobile & Tablet](https://img.shields.io/badge/Mobile-Android_%7C_iOS-green?style=for-the-badge&logo=android&logoColor=white)](#-cross-platform-ecosystem)
+[![Web App](https://img.shields.io/badge/Web-Browser_Client-orange?style=for-the-badge&logo=googlechrome&logoColor=white)](#-cross-platform-ecosystem)
+
 [![React](https://img.shields.io/badge/React-18-61dafb?style=for-the-badge&logo=react&logoColor=black)](https://react.dev/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.0-3178c6?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-Glassmorphism-38bdf8?style=for-the-badge&logo=tailwindcss&logoColor=white)](https://tailwindcss.com/)
@@ -13,7 +17,7 @@
 [![Cloud Sync](https://img.shields.io/badge/Cloud_Storage-GitHub_DB_Sync-181717?style=for-the-badge&logo=github&logoColor=white)](#-git-as-a-database-architecture)
 [![License: Proprietary](https://img.shields.io/badge/License-Proprietary-red?style=for-the-badge)](LICENSE.md)
 
-[Overview](#-overview) • [UI Showcase](#-visual-showcase) • [Core Pillars](#-key-features--pillars) • [Architecture](#-system-architecture) • [Database Schema](#-data-architecture) • [Tech Stack](#-technical-stack)
+[Overview](#-overview) • [Platforms](#-cross-platform-ecosystem) • [UI Showcase](#-visual-showcase) • [Core Pillars](#-key-features--pillars) • [Architecture](#-system-architecture) • [Database Schema](#-data-architecture) • [Tech Stack](#-technical-stack)
 
 </div>
 
@@ -26,10 +30,26 @@
 
 ## 📌 Overview
 
-**MovieVault AI** is a modern personal entertainment dashboard designed for cinephiles and series enthusiasts. Built with a sleek dark-glassmorphism aesthetic, it combines:
-1. **Curated Vault Management**: Tracking *Currently Watching*, *Watch Later*, *Completed*, and *Favorites* with real-time remaining-time progress bars.
-2. **Global TMDB Discovery**: Direct integration with The Movie Database (TMDB), enriched with a proprietary **Smart Vault Filter** that automatically hides titles already in your collection.
-3. **Git-as-a-Database (GitHub DB Sync)**: A serverless synchronization engine that persists user watchlist states directly to a private GitHub repository via GitHub REST APIs, providing version control, zero cloud hosting fees, and complete data ownership.
+**MovieVault AI** is a cross-platform personal entertainment dashboard designed for cinephiles and series enthusiasts. Built with a sleek dark-glassmorphism aesthetic, it combines:
+1. **Multi-Platform Access**: Available natively across **Desktop** (macOS, Windows, Linux), **Mobile & Tablet** (Android, iOS), and modern **Web Browsers**.
+2. **Curated Vault Management**: Tracking *Currently Watching*, *Watch Later*, *Completed*, and *Favorites* with real-time remaining-time progress bars.
+3. **Global TMDB Discovery**: Direct integration with The Movie Database (TMDB), enriched with a proprietary **Smart Vault Filter** that automatically hides titles already in your collection.
+4. **Git-as-a-Database (GitHub DB Sync)**: A serverless synchronization engine that persists user watchlist states directly to a private GitHub repository via GitHub REST APIs, providing version control, zero cloud hosting fees, and complete data ownership.
+
+---
+
+## 📱💻 Cross-Platform Ecosystem
+
+MovieVault AI is engineered as a unified, seamless multi-device experience across desktop, tablet, and mobile environments:
+
+| Platform | Target Systems | Key Features & Form Factor |
+| :--- | :--- | :--- |
+| 📱 **Mobile & Tablet** | Android & iOS (Phones & Tablets) | Touch-optimized glassmorphism UI, adaptive landscape cinema view (as showcased in tablet UI), gesture-driven queue management, offline library caching, and instant mobile discovery. |
+| 💻 **Desktop App** | macOS, Windows, Linux | Native desktop window integration, multi-monitor theater mode, global media keyboard shortcuts, background GitHub DB synchronization, and offline JSON exports. |
+| 🌐 **Web Client** | Modern Web Browsers | Zero-install progressive web application accessible from any browser with full TMDB catalog search and instant cloud sync. |
+
+### 🔄 Seamless Multi-Device Sync
+Because MovieVault AI leverages **Git-as-a-Database** via the GitHub REST API, your watchlists, progress markers (`45 min left`), custom ratings, and curated collections remain in **100% real-time synchronization** across your phone, tablet, desktop workstation, and laptop without requiring proprietary sync subscriptions.
 
 ---
 
@@ -43,7 +63,7 @@
 
 ---
 
-### 2. Personal Vault & Real-Time Queue
+### 2. Personal Vault & Real-Time Queue (Tablet / Mobile Landscape View)
 *Queue management featuring watch progress bars (`45 min left`), priority tagging, and one-click cloud backup.*
 ![Personal Vault Dashboard](assets/screenshots/vault-dashboard.png)
 
@@ -84,7 +104,13 @@ Rather than relying on costly third-party database-as-a-service providers (Supab
 
 ```mermaid
 flowchart TD
-    subgraph UI ["MovieVault AI Client Layer"]
+    subgraph Clients ["Cross-Platform Clients"]
+        Desktop["💻 Desktop App (macOS / Windows / Linux)"]
+        Mobile["📱 Mobile & Tablet App (Android / iOS)"]
+        Web["🌐 Web Client (PWA)"]
+    end
+
+    subgraph UI ["MovieVault AI Core Engine"]
         Hero["Spotlight Hero & Trailer Player"]
         Vault["Personal Vault & Watch Queue"]
         Discover["TMDB Discover Grid"]
@@ -103,6 +129,8 @@ flowchart TD
         PrivateRepo["Private Backup Repository (movievault-db)"]
         VaultJSON["vault_database.json (Version Controlled)"]
     end
+
+    Clients --> UI
 
     Discover -->|"Query Titles"| Search
     Discover -->|"Fetch Feeds"| Trending
@@ -148,7 +176,9 @@ The application persists library state in a normalized, portable JSON format. A 
 
 | Domain | Technology | Purpose |
 | :--- | :--- | :--- |
-| **Frontend Framework** | React 18 / Next.js | Reactive component tree, fast navigation, and server-side rendering |
+| **Desktop Platform** | Electron / Native Framework | Native desktop runtime for macOS, Windows, and Linux |
+| **Mobile & Tablet** | React Native / Capacitor | Native touch application for Android and iOS |
+| **Web Platform** | React 18 / Next.js | Modern web client with responsive layout and PWA capabilities |
 | **Styling** | Tailwind CSS 3/4 | Responsive dark-mode glassmorphism theme and typography |
 | **Icons & Visuals** | Lucide Icons | Clean, modern iconography |
 | **External Catalog** | TMDB REST API v3 | Rich movie/series metadata, cast lists, high-res posters, and backdrops |
@@ -160,7 +190,7 @@ The application persists library state in a normalized, portable JSON format. A 
 ## 🔒 Security & Data Privacy
 
 - **Data Sovereignty**: The user owns 100% of their cinema library data. Data is never monetized or fed into commercial marketing algorithms.
-- **Token Security**: Personal GitHub access tokens for Cloud DB Sync are stored exclusively in the browser's local sandbox and are never transmitted to third-party intermediate proxies.
+- **Token Security**: Personal GitHub access tokens for Cloud DB Sync are stored exclusively in the client's local sandbox and are never transmitted to third-party intermediate proxies.
 - **Private Database Separation**: Sensitive user databases remain safely segregated in private repositories (`movievault-db`), while architectural and showcase assets reside in this public repository.
 
 ---
